@@ -1,7 +1,11 @@
-import Image from "next/image";
+import Navbar from "@/components/navbar/NavBar";
+
 
 export default function Home() {
   return (
-    <div className="text-center mt-5">BLOG-APP-2025</div>
+    <>
+      <Navbar />
+
+    </>
   );
 }
