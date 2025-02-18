@@ -18,3 +18,19 @@
         left: 29px;
     }
 }
+
+.Frame14122Container {
+    position: absolute;
+    top: 189px;
+    left: 149px;
+    gap: 17px;
+    width: 43px;
+    height: 16px;
+
+}
+
+@media (max-width: 428px) {
+    .hideOnSmall {
+        display: none;
+    }
+}
