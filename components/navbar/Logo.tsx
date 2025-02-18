@@ -14,7 +14,7 @@ function Logo() {
                 alt="Logo"
                 priority
                 className="hidden md:block" // Hide on small screens
-                style={{ height: 'auto' }}
+                style={{ width: 'auto', height: 'auto' }}
             />
             <Image
                 src={smallImage}
@@ -22,7 +22,7 @@ function Logo() {
                 height={58}
                 alt="Small Logo"
                 className="block md:hidden" // Show on small screens
-                style={{ height: 'auto' }}
+                style={{ width: 'auto', height: 'auto' }}
             />
         </div>
     );

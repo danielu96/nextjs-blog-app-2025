@@ -11,7 +11,7 @@ function Line1() {
                 height={1}
                 alt="Line1"
                 priority
-                style={{ height: 'auto' }}
+                style={{ width: 'auto', height: 'auto' }}
 
             />
         </div>

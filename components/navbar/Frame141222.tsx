@@ -11,7 +11,7 @@ function Frame14122() {
                 height={16}
                 alt="Blog"
                 priority
-                style={{ height: 'auto' }}
+                style={{ width: 'auto', height: 'auto' }}
             />
         </div>
     )
