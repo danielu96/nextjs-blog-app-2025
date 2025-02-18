@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.logoContainer {
+    position: absolute;
+    top: 63px;
+    left: 144px;
+    gap: 121px;
+}
+
+@media (max-width: 428px) {
+    .logoContainer {
+        position: absolute;
+        width: 185px;
+        height: 58px;
+        top: 30px;
+        left: 29px;
+    }
+}
