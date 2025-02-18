@@ -42,3 +42,33 @@
 
 
 }
+
+.header {
+    width: 260px;
+    height: 44px;
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    size: 32px;
+    top: 287px;
+    left: 144px;
+    font-weight: 700;
+    color: #36385C;
+    line-height: 43, 58px;
+    letter-spacing: 0%;
+}
+
+@media (max-width: 428px) {
+
+    .header {
+        width: 228px;
+        height: 38px;
+        font-family: 'Open Sans', sans-serif;
+        position: absolute;
+        size: 28px;
+        top: 155px;
+        left: 37px;
+        font-weight: 700;
+        color: #36385C;
+
+    }
+}
