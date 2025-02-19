@@ -72,3 +72,169 @@
 
     }
 }
+
+.CategoriesContainer {
+    position: absolute;
+    width: 1920px;
+    height: 717px;
+    top: 385px;
+    left: 1px;
+    background-color: #F4F4F4;
+
+}
+
+@media(max-width: 428px) {
+    .CategoriesContainer {
+        position: absolute;
+        width: 428px;
+        height: 635px;
+        top: 201px;
+        left: 1px;
+        background-color: #F4F4F4;
+    }
+
+    .frames {
+        display: none;
+    }
+
+    .embla {
+        display: block;
+    }
+}
+
+@media (min-width: 429px) {
+    .embla {
+        display: none;
+    }
+
+    .frames {
+        display: block;
+    }
+}
+
+.TextKategorie {
+    position: absolute;
+    width: 116px;
+    height: 33px;
+    top: 55px;
+    left: 144px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32.68px;
+    letter-spacing: 0%;
+    color: #36385C;
+}
+
+.Frame5 {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 138px;
+    left: 144px;
+}
+
+.Frame6 {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 138px;
+    left: 564px;
+}
+
+.Frame7 {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 138px;
+    left: 987px;
+}
+
+.Frame8 {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 138px;
+    left: 1409px;
+}
+
+
+
+.embla {
+    overflow: hidden;
+    width: 100%;
+}
+
+.embla__container {
+    display: flex;
+
+}
+
+.embla__slide {
+    position: relative;
+    min-width: 100%;
+}
+
+.image {
+    margin-top: 88px;
+    margin-left: 48px;
+}
+
+.embla__button {
+    position: absolute;
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.embla__button__prev {
+    position: absolute;
+    top: 305px;
+    left: 15px;
+}
+
+.embla__button__next {
+    position: absolute;
+    top: 305px;
+    left: 398px;
+}
+
+.embla__button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.embla__dots {
+    display: none;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+@media (max-width: 429px) {
+    .embla__dots {
+        position: absolute;
+        Top: 37px;
+        Left: 165px;
+        display: flex;
+
+    }
+}
+
+
+.embla__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #F4F4F4;
+    margin: 0 5px;
+    cursor: pointer;
+    border: 1px solid #3f3a54;
+    width: 16px;
+    height: 16px;
+}
+
+.embla__dot__active {
+    background-color: #36385C;
+}
