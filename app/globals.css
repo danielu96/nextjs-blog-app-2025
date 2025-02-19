@@ -79,6 +79,7 @@
     height: 717px;
     top: 385px;
     left: 1px;
+    padding-left: 100px;
     background-color: #F4F4F4;
 
 }
@@ -90,6 +91,7 @@
         height: 635px;
         top: 201px;
         left: 1px;
+        padding-left: 0px;
         background-color: #F4F4F4;
     }
 
@@ -108,7 +110,11 @@
     }
 
     .frames {
-        display: block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 1631px;
+        position: relative;
     }
 }
 
@@ -163,6 +169,7 @@
 .embla {
     overflow: hidden;
     width: 100%;
+    position: relative;
 }
 
 .embla__container {
@@ -237,4 +244,11 @@
 
 .embla__dot__active {
     background-color: #36385C;
+}
+
+.frame-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
