@@ -2,9 +2,16 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
+import { categories } from '@/utils/categories';
+import Link from 'next/link';
 
 
-function Rectangle4() {
+function Rectangle4({
+    category
+}: {
+    category?: string;
+
+}) {
     const [emblaRef, emblaApi] = useEmblaCarousel()
     const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
     const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
@@ -55,18 +62,21 @@ function Rectangle4() {
             </div>
             <div className='embla' ref={emblaRef}>
                 <div className='embla__container'>
-                    {images.map((image, index) => (
-                        <div key={index} className='embla__slide'>
-                            <Image
-                                src={image}
-                                width={340}
-                                height={433}
-                                alt={`Wiedza ${index + 1}`}
-                                priority
-                                className='image'
-                            />
-                        </div>
-                    ))}
+                    {categories.map((item, index) => {
+                        const isActive = item.label === category
+                        return (
+                            <Link key={index} href={`/?category=${item.label}`} className='embla__slide'>
+                                <Image
+                                    src={item.image}
+                                    alt={item.label}
+                                    width={340}
+                                    height={433}
+                                    priority
+                                    className={`image ${isActive ? 'border-2 border-red-600 shadow-sm rounded-tl-[60px] rounded-br-[60px] ' : ''}`}
+                                />
+                            </Link>
+                        )
+                    })}
                 </div>
                 <button
                     className='embla__button embla__button__prev'
@@ -94,8 +104,34 @@ function Rectangle4() {
                 </button>
 
             </div>
-
             <div className='frames'>
+                {categories.map((item, index) => {
+                    const isActive = item.label === category
+                    return (
+                        <Link
+                            key={item.label}
+                            href={`/?category=${item.label}`}
+                        >
+                            <article
+                                className={`mt-5 flex flex-col  cursor-pointer duration-300 hover:text-slate-500 ${isActive ? 'border-red-400' : ''}`}
+
+                            >
+                                <Image
+                                    src={item.image}
+                                    alt={item.label}
+                                    width={366}
+                                    height={457}
+                                    priority
+                                    className={`image ${isActive ? 'border-2 border-red-600 shadow-sm rounded-tl-[60px] rounded-br-[60px] ' : ''}`}
+                                />
+
+                            </article>
+                        </Link>
+                    )
+                })}
+            </div>
+
+            {/* <div className='frames'>
                 <div className='Frame5'>
                     <Image
                         src={image5}
@@ -139,9 +175,9 @@ function Rectangle4() {
 
 
 
-            </div>
+            </div> */}
 
-        </div>
+        </div >
     )
 }
 
