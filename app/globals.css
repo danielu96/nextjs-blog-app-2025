@@ -252,3 +252,44 @@
     align-items: center;
     text-align: center;
 }
+
+.postList {
+    position: absolute;
+    top: 1293px;
+    left: 144px;
+    width: 1631px;
+    height: 579px;
+    gap: 56px;
+}
+
+@media(max-width:428px) {
+    .postList {
+        position: absolute;
+        top: 1076px;
+        left: 29px;
+        width: 366px;
+        gap: 56px;
+    }
+}
+
+.card {
+    height: 579px;
+    background-color: rgb(242, 237, 237);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 20px;
+    padding: 35px;
+    border-top-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+
+}
+
+@media(min-width:428px) {
+    .card {
+
+        border-top-left-radius: 60px;
+        border-bottom-right-radius: 60px;
+    }
+}
