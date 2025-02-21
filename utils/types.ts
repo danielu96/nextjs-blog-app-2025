@@ -9,3 +9,7 @@ export interface PostItemProps {
     title: string;
     body: string;
 }
+interface Favorite {
+    id: number;
+    dateAdded: string;
+}
