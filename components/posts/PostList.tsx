@@ -27,7 +27,12 @@ const PostList = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-16">
                 {posts.map((post) => {
                     return (
-                        <PostItem key={post.id} />
+                        <PostItem
+                            key={post.id}
+                            id={post.id}
+                            title={post.title}
+                            body={post.body}
+                        />
                     );
                 })}
             </div>
