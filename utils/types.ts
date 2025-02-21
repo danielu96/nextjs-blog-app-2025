@@ -8,6 +8,7 @@ export interface PostItemProps {
     id: number;
     title: string;
     body: string;
+    dateAdded?: string;
     isFavorite: boolean;
     toggleFavorite: (id: number) => void;
 }
