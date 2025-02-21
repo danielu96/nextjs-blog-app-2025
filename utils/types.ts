@@ -4,3 +4,8 @@ export interface Post {
     body: string;
 
 }
+export interface PostItemProps {
+    id: number;
+    title: string;
+    body: string;
+}
