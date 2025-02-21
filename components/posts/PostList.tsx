@@ -73,6 +73,7 @@ const PostList = () => {
                             title={post.title}
                             body={post.body}
                             isFavorite={!!favorite}
+                            dateAdded={favorite?.dateAdded}
                             toggleFavorite={toggleFavorite}
                         />
                     );
