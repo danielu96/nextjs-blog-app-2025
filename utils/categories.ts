@@ -1,5 +1,5 @@
 
-type Category = {
+export type Category = {
     label: CategoryLabel;
     image: string;
 };
