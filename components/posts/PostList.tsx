@@ -5,6 +5,8 @@ import PostItem from './PostItem';
 import { Post } from '@/utils/types';
 import { Favorite } from '@/utils/types';
 import { useSearchParams } from 'next/navigation';
+import Error from '../error/Error';
+import EmptyList from '../error/EmptyList';
 
 const PostList = () => {
     const searchParams = useSearchParams();
@@ -18,7 +20,7 @@ const PostList = () => {
     });
     const [activeTab, setActiveTab] = useState<'all' | 'favorites'>('all');
     const [selectedCategory, setSelectedCategory] = useState<string | null>(category || null); // Ustawienie początkowej kategorii na podstawie parametru z URL
-
+    const [error, setError] = useState<string | Error | null>(null);
 
     useEffect(() => {
         const getPosts = async () => {
@@ -28,6 +30,7 @@ const PostList = () => {
         };
         getPosts();
     }, []);
+
     useEffect(() => {
         setSelectedCategory(category);
     }, [category]);
@@ -77,24 +80,31 @@ const PostList = () => {
             </div>
 
             {/* Wpisy */}
-            < div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-16">
-                {filteredPosts.map((post) => {
-                    const favorite = favorites.find(fav => fav.id === post.id);
+            {error ? (
+                <Error error={error} />
+            ) : filteredPosts.length === 0 ? (
+                <EmptyList />
+            ) : (
+                < div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-16">
+                    {filteredPosts.map((post) => {
+                        const favorite = favorites.find(fav => fav.id === post.id);
 
-                    return (
-                        <PostItem
-                            key={post.id}
-                            id={post.id}
-                            title={post.title}
-                            body={post.body}
-                            isFavorite={!!favorite}
-                            dateAdded={favorite?.dateAdded}
-                            toggleFavorite={toggleFavorite}
-                            category={post.category}
-                        />
-                    );
-                })}
-            </div>
+                        return (
+                            <PostItem
+                                key={post.id}
+                                id={post.id}
+                                title={post.title}
+                                body={post.body}
+                                isFavorite={!!favorite}
+                                dateAdded={favorite?.dateAdded}
+                                toggleFavorite={toggleFavorite}
+                                category={post.category}
+                            />
+                        );
+                    })}
+
+                </div>
+            )}
         </div >
     );
 };
