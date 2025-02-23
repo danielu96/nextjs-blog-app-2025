@@ -7,11 +7,13 @@ import { Favorite } from '@/utils/types';
 import { useSearchParams } from 'next/navigation';
 import Error from '../error/Error';
 import EmptyList from '../error/EmptyList';
+import { useSort } from '../context/SortContext';
 
 const PostList = () => {
     const searchParams = useSearchParams();
     const category = searchParams.get('category'); // Pobieranie kategorii z UR
     const [posts, setPosts] = useState<Post[]>([]);
+    const { sortOrder, setSortOrder } = useSort();
     const [favorites, setFavorites] = useState<Favorite[]>(() => {
         if (typeof window !== 'undefined') {
             return JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -46,7 +48,7 @@ const PostList = () => {
     const filteredPosts = posts.filter(post => {
         console.log("Posty przed filtrowaniem:", posts);
         console.log("Wybrana kategoria:", selectedCategory);
-        console.log("Parametr category z URL:", searchParams.get('category')); // Dodane console.log
+        console.log("Parametr category z URL:", searchParams.get('category'));
         if (selectedCategory && post.category.label !== selectedCategory) {
             return false;
         }
@@ -56,6 +58,21 @@ const PostList = () => {
         }
         return true;
     });
+    const sortedFavorites = activeTab === 'favorites'
+        ? [...favorites].filter(fav => {
+            const post = posts.find(p => p.id === fav.id);
+            return post && (!selectedCategory || post.category.label === selectedCategory);
+        }).sort((a, b) => {
+            const dateA = new Date(a.dateAdded).getTime();
+            const dateB = new Date(b.dateAdded).getTime();
+            console.log('Date A:', dateA, 'Date B:', dateB);
+            if (sortOrder === 'latest') {
+                return dateB - dateA;
+            } else {
+                return dateA - dateB;
+            }
+        })
+        : [];
 
     return (
         <div className="postList">
@@ -75,34 +92,55 @@ const PostList = () => {
                     >
                         ULUBIONE
                     </button>
-
                 </div>
+                {activeTab === 'favorites' && (
+                    <div className="flex space-x-4">
+                        <button onClick={() => setSortOrder('latest')}>Najnowsze</button>
+                        <button onClick={() => setSortOrder('oldest')}>Najstarsze</button>
+                    </div>
+                )}
             </div>
-
             {/* Wpisy */}
             {error ? (
                 <Error error={error} />
             ) : filteredPosts.length === 0 ? (
                 <EmptyList />
             ) : (
-                < div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-16">
-                    {filteredPosts.map((post) => {
-                        const favorite = favorites.find(fav => fav.id === post.id);
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-16">
+                    {activeTab === 'favorites'
+                        ? sortedFavorites.map((fav) => {
+                            const post = posts.find(p => p.id === fav.id);
+                            if (!post) return null;
 
-                        return (
-                            <PostItem
-                                key={post.id}
-                                id={post.id}
-                                title={post.title}
-                                body={post.body}
-                                isFavorite={!!favorite}
-                                dateAdded={favorite?.dateAdded}
-                                toggleFavorite={toggleFavorite}
-                                category={post.category}
-                            />
-                        );
-                    })}
+                            return (
+                                <PostItem
+                                    key={fav.id}
+                                    id={fav.id}
+                                    title={post.title}
+                                    body={post.body}
+                                    isFavorite={true}
+                                    dateAdded={fav.dateAdded}
+                                    toggleFavorite={toggleFavorite}
+                                    category={post.category}
+                                />
+                            );
+                        })
+                        : filteredPosts.map((post) => {
+                            const favorite = favorites.find(fav => fav.id === post.id);
 
+                            return (
+                                <PostItem
+                                    key={post.id}
+                                    id={post.id}
+                                    title={post.title}
+                                    body={post.body}
+                                    isFavorite={!!favorite}
+                                    dateAdded={favorite?.dateAdded}
+                                    toggleFavorite={toggleFavorite}
+                                    category={post.category}
+                                />
+                            );
+                        })}
                 </div>
             )}
         </div >
