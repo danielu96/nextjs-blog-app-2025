@@ -4,6 +4,7 @@ import Header from "@/components/header/Header";
 import Rectangle4 from "@/components/home/Rectangle4";
 import { useSearchParams } from 'next/navigation'
 import PostList from "@/components/posts/PostList";
+import { Suspense } from "react";
 
 export default function Home() {
   const searchParams = useSearchParams()
@@ -13,7 +14,10 @@ export default function Home() {
       <Navbar />
       <Header />
       <Rectangle4 category={category ?? undefined} />
-      <PostList />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PostList />
+      </Suspense>
+
     </>
   );
 }
