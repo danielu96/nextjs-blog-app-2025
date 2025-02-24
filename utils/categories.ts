@@ -34,3 +34,9 @@ export const categories: Category[] = [
         color: 'dostępne',
     },
 ];
+export const categoryColors = {
+    'wiedza': 'text-wiedza',
+    'inspiracje': 'text-inspiracje',
+    'interpretacje': 'text-interpretacje',
+    'dostępne': 'text-dostępne',
+};
