@@ -7,7 +7,7 @@ const API_URL = 'https://jsonplaceholder.typicode.com';
 
 export const fetchPosts = async () => {
     try {
-        const response = await axios.get(`${API_URL}/postsd`);
+        const response = await axios.get(`${API_URL}/posts`);
         const posts = response.data.map((post: any) => ({
             ...post,
             category: categories[Math.floor(Math.random() * categories.length)] as Category,
@@ -33,7 +33,7 @@ export const fetchPosts = async () => {
 
 export const fetchPostDetails = async (id: number) => {
     try {
-        const response = await axios.get(`${API_URL}/postsd/${id}`);
+        const response = await axios.get(`${API_URL}/posts/${id}`);
         const post = {
             ...response.data,
             category: categories[Math.floor(Math.random() * categories.length)] as Category,
