@@ -24,14 +24,21 @@ const PostList = () => {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(category || null); // Ustawienie początkowej kategorii na podstawie parametru z URL
     const [error, setError] = useState<string | Error | null>(null);
 
+
     useEffect(() => {
         const getPosts = async () => {
-            const data = await fetchPosts();
-            setPosts(data);
-            console.log('pobrane posty', data);
+            try {
+                const fetchedPosts = await fetchPosts();
+                setPosts(fetchedPosts);
+                setError(null);
+            } catch (err: any) {
+                setError(err.message);
+                console.error("Error fetching posts:", err);
+            }
         };
         getPosts();
     }, []);
+
 
     useEffect(() => {
         setSelectedCategory(category);
