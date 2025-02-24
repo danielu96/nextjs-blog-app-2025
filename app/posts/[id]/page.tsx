@@ -15,6 +15,7 @@ import { Favorite } from '@/utils/types';
 const PostDetailsPage = () => {
     const { id } = useParams();
     const [post, setPost] = useState<Post | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [favorites, setFavorites] = useState<Favorite[]>(() => {
         if (typeof window !== 'undefined') {
             return JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -23,14 +24,29 @@ const PostDetailsPage = () => {
     });
 
     useEffect(() => {
-        if (id) {
-            const getPostDetails = async () => {
-                const data = await fetchPostDetails(Number(id));
-                setPost(data);
-            };
-            getPostDetails();
-        }
+        const getPostDetails = async () => {
+            try {
+                const fetchedPost = await fetchPostDetails(Number(id));
+                setPost(fetchedPost);
+                setError(null);
+            } catch (err: any) {
+                setError(err.message);
+                console.error("Error fetching post details:", err);
+            }
+        };
+        getPostDetails();
     }, [id]);
+
+    if (error) {
+        return <div className='text-center mt-20 text-2xl text-red-700'>Error: {error}</div>; // Wyświetlamy komunikat błędu
+    }
+
+    if (!post) {
+        return <div>Loading...</div>;
+    }
+
+
+
     const toggleFavorite = (id: number) => {
         const isFavorite = favorites.some(fav => fav.id === id);
         const updatedFavorites = isFavorite
@@ -39,9 +55,6 @@ const PostDetailsPage = () => {
         setFavorites(updatedFavorites);
         localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     };
-
-
-
     if (!post) {
         return <div>Loading...</div>;
     }

@@ -2,10 +2,13 @@
 'use client';
 import { PostItemProps } from "@/utils/types";
 import Link from 'next/link';
-import { categoryColors } from "@/utils/categories";
 
-
-
+const categoryColors = {
+    'wiedza': 'text-wiedza',
+    'inspiracje': 'text-inspiracje',
+    'interpretacje': 'text-interpretacje',
+    'dostępne': 'text-dostępne',
+};
 
 const PostItem: React.FC<PostItemProps> = ({ id, title, body, dateAdded, category }) => {
     return (
