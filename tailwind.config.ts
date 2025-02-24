@@ -11,6 +11,10 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'wiedza': '#444E8D',
+        'inspiracje': '#FFBF42',
+        'interpretacje': '#D94F4F',
+        'dostępne': '#82E49A',
       },
     },
   },
